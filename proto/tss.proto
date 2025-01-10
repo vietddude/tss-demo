@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package tss;
+option go_package = "tss-demo/proto";
+
+service TSSService {
+  rpc Exchange(stream TSSMessage) returns (stream TSSMessage) {}
+  rpc StartKeyGen(KeyGenRequest) returns (KeyGenResponse) {}
+}
+
+message TSSMessage {
+  uint32 from = 1;
+  uint32 to = 2;
+  bool broadcast = 3;
+  bytes payload = 4;
+}
+
+message KeyGenRequest {
+  int32 threshold = 1;
+  repeated uint32 party_ids = 2;
+}
+
+message KeyGenResponse {
+  bool success = 1;
+  string error = 2;
+}
