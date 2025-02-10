@@ -276,7 +276,7 @@ func (p *Party) Sign(ctx context.Context, msgHash []byte) ([]byte, error) {
 				p.logger.Warnf("Received error when serializing message: %v", err)
 				continue
 			}
-			p.logger.Debugf("%s Got message from %s", p.id.Id, routing.From.Id)
+			p.logger.Debugf("[%s] -> [%s]", routing.From.Id, p.id.Id)
 			ok, err := party.UpdateFromBytes(raw, routing.From, routing.IsBroadcast)
 			if !ok {
 				p.logger.Warnf("Received error when updating party: %v", err.Error())
@@ -335,7 +335,7 @@ func (p *Party) KeyGen(ctx context.Context) ([]byte, error) {
 				p.logger.Warnf("Received error when serializing message: %v", err)
 				continue
 			}
-			p.logger.Debugf("%s Got message from %s", p.id.Id, routing.From.Id)
+			p.logger.Debugf("[%s] -> [%s]", routing.From.Id, p.id.Id)
 			ok, err := party.UpdateFromBytes(raw, routing.From, routing.IsBroadcast)
 			if !ok {
 				p.logger.Warnf("Received error when updating party: %v", err.Error())
